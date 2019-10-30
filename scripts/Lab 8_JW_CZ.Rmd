@@ -1,0 +1,87 @@
+---
+title             : "EDLD 610: Lab 8"
+shorttitle        : "Fall 2019"
+
+author: 
+  - name          : "Jim Wright"
+    affiliation   : "1"
+    corresponding : yes    # Define only one corresponding author
+    address       : "1655 Alder Street 
+                     Eugene, OR 97401"
+    email         : "jwrigh16@uoregon.edu"
+  - name          : "Claire Zhang"
+    affiliation   : "2"
+
+affiliation:
+  - id            : "1"
+    institution   : "University of Oregon Department of Communication Disorders & Sciences"
+  - id            : "2"
+    institution   : "University of Oregon Department of Educational Methodology, Policy, & Leadership"
+
+
+abstract: |
+  The purpose of this lab is to gain experience using the papaja package of rmd to render an APA style document.  The second purpose is to work collaboratively with others to practice the process of using GitKraken and GitHub to produce and share data.  
+  
+  <!-- https://tinyurl.com/ybremelq -->
+  
+keywords          : "APA, papaja, GitKraken, GitHub, merge error"
+
+
+bibliography      : ["r-references.bib"]
+
+floatsintext      : no
+figurelist        : no
+tablelist         : no
+footnotelist      : no
+linenumbers       : no
+mask              : no
+draft             : no
+
+documentclass     : "apa6"
+classoption       : "man"
+output            : papaja::apa6_pdf
+---
+
+```{r setup, include = FALSE}
+library("papaja")
+```
+
+```{r analysis-preferences}
+# Seed for random number generation
+set.seed(42)
+knitr::opts_chunk$set(cache.extra = knitr::rand_seed)
+```
+
+
+
+# Methods
+We report how we determined our sample size, all data exclusions (if any), all manipulations, and all measures in the study. <!-- 21-word solution (Simmons, Nelson & Simonsohn, 2012; retrieved from http://ssrn.com/abstract=2160588) -->
+
+## Participants
+
+## Material
+
+## Procedure
+
+## Data analysis
+We used `r cite_r("r-references.bib")` for all our analyses.
+
+
+# Results
+
+# Discussion
+
+
+\newpage
+
+# References
+```{r create_r-references}
+r_refs(file = "r-references.bib")
+```
+
+\begingroup
+\setlength{\parindent}{-0.5in}
+\setlength{\leftskip}{0.5in}
+
+<div id = "refs"></div>
+\endgroup
