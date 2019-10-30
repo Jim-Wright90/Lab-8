@@ -89,6 +89,30 @@ We used `r cite_r("r-references.bib")` for all our analyses.
 
 # Results
 
+```{r tbls, results = "asis"}
+
+?kable
+
+library(knitr)
+
+library(kableExtra)
+
+star %>% 
+  group_by(sex, frl) %>% 
+  summarize(math_mean = mean(tmathss),
+            math_sd   = sd(tmathss),
+            rdg_mean  = mean(treadss),
+            rdg_sd    = sd(treadss)) %>% 
+  kable(digits = 2)
+
+```
+
+
+```{r plot}
+
+
+
+```
 # Discussion
 
 
