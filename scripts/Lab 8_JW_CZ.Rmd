@@ -43,7 +43,25 @@ output            : papaja::apa6_pdf
 ---
 
 ```{r setup, include = FALSE}
-library("papaja")
+library(rio)
+library(here)
+library(tidyverse)
+library(janitor)
+library(datapasta)
+library(papaja)
+
+theme_set(theme_minimal())
+opts_chunk$set(echo = FALSE,
+               fig.width = 6.5,
+               fig.height = 8)
+
+```
+
+```{r load-data}
+star <- import(here("data", "star.csv"),
+            setclass = "tbl_df") %>% 
+  characterize()
+
 ```
 
 ```{r analysis-preferences}
