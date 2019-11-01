@@ -27,7 +27,7 @@ abstract: |
 keywords          : "APA, papaja, GitKraken, GitHub, merge error"
 
 
-bibliography      : "lab_8_references.bib"
+bibliography      : lab_8_references.bib
 
 floatsintext      : no
 figurelist        : no
@@ -49,6 +49,7 @@ library(tidyverse)
 library(janitor)
 library(datapasta)
 library(papaja)
+library(knitr)
 
 theme_set(theme_minimal())
 opts_chunk$set(echo = FALSE,
@@ -72,7 +73,7 @@ knitr::opts_chunk$set(cache.extra = knitr::rand_seed)
 
 # Introduction 
 
-This introduction provides some examples of in-text citations discussed during week 5, lecture 2 [@Broglio_2014].  As discussed by [-@Sohlberg_2014], I find it fascinating we can add APA references into R markdown. 
+This introduction provides some examples of in-text citations discussed during week 5, lecture 2 [@broglio2014].  As discussed by Sohlberg and Ledbetter [-@sohlberg2016], I find it fascinating we can add APA references into R markdown. 
 
 # Methods
 We report how we determined our sample size, all data exclusions (if any), all manipulations, and all measures in the study. <!-- 21-word solution (Simmons, Nelson & Simonsohn, 2012; retrieved from http://ssrn.com/abstract=2160588) -->
@@ -93,7 +94,7 @@ We used `r cite_r("r-references.bib")` for all our analyses.
 
 ?kable
 
-library(knitr)
+
 
 library(kableExtra)
 
@@ -107,12 +108,29 @@ star %>%
 
 ```
 
+The average reading and math scores were higher in males and females who did not qualify for free and reduced lunch (FRL), suggesting children who do qualify for free and reduced lunch may be vulnerable to decreased reading and math skills.  For both FRL groups (students who qualified and did not qualify for FRL), girls scored higher on average in both reading and math. 
 
 ```{r plot}
 
-
+star %>% 
+  mutate(`Lunch status` = ifelse(frl == "no", "Paid Meals", "Free/Reduced Price Meals")) %>% 
+  ggplot(aes(totexp, tmathss)) +
+  geom_point(color = "gray70") +
+  geom_smooth(aes(color = `Lunch status`), 
+              method = "lm",
+              fill = "#8da0cb") +
+  scale_color_brewer(palette = "Set2") +
+  labs(y = "Total Math Scale Score",
+       x = "Teacher Experience (years)",
+       title = "Relation between teacher experience and math scores",
+       subtitle = "Separate regression lines displayed by free/reduced price lunch status") +
+ theme_minimal() +
+ theme(legend.position = "bottom")
 
 ```
+
+For both students who do and do not qualify for free and reduced lunch, there appears to be a slight, positve correlation between the student's total math scale score and the teacher's years of experience. Teachers with more years of experience are more likely to teach students who score higher in math than teachers with less years of experience. Overall, students who do not qualify for free and reduced lunch score higher in math than students who do qualify for free and reduced lunch regardless of the number of years the teacher has taught. 
+
 # Discussion
 
 
