@@ -1,3 +1,4 @@
+<<<<<<< Updated upstream
 ---
 title             : "EDLD 610: Lab 8"
 shorttitle        : "Fall 2019"
@@ -148,3 +149,146 @@ r_refs(file = "lab_8_references.bib")
 
 <div id = "refs"></div>
 \endgroup
+=======
+---
+title             : "EDLD 610: Lab 8"
+shorttitle        : "Fall 2019"
+
+author: 
+  - name          : "Jim Wright"
+    affiliation   : "1"
+    corresponding : yes    # Define only one corresponding author
+    address       : "1655 Alder Street 
+                     Eugene, OR 97401"
+    email         : "jwrigh16@uoregon.edu"
+  - name          : "Claire Zhang"
+    affiliation   : "2"
+    address       : "2250 Patterson Street
+                     Eugene, OR 97405"
+    email         : "congliz@uoregon.edu"
+
+affiliation:
+  - id            : "1"
+    institution   : "University of Oregon Department of Communication Disorders & Sciences"
+  - id            : "2"
+    institution   : "University of Oregon Department of Educational Methodology, Policy, & Leadership"
+
+
+abstract: |
+  The purpose of this lab is to gain experience using the papaja package of rmd to render an APA style document.  The second purpose is to work collaboratively with others to practice the process of using GitKraken and GitHub to produce and share data.  
+  
+  <!-- https://tinyurl.com/ybremelq -->
+  
+keywords          : "APA, papaja, GitKraken, GitHub, merge error"
+
+
+bibliography      : "lab_8_references.bib"
+
+floatsintext      : no
+figurelist        : no
+tablelist         : no
+footnotelist      : no
+linenumbers       : no
+mask              : no
+draft             : no
+
+documentclass     : "apa6"
+classoption       : "man"
+output            : papaja::apa6_pdf
+---
+
+```{r setup, include = FALSE}
+library(rio)
+library(here)
+library(tidyverse)
+library(janitor)
+library(datapasta)
+library(papaja)
+library(ggplot2)
+
+theme_set(theme_minimal())
+knitr::opts_chunk$set(echo = FALSE,
+               fig.width = 6.5,
+               fig.height = 8)
+
+```
+
+```{r load-data}
+star <- import(here("data", "star.csv"),
+            setclass = "tbl_df") %>% 
+  characterize()
+
+```
+
+```{r analysis-preferences}
+# Seed for random number generation
+set.seed(42)
+knitr::opts_chunk$set(cache.extra = knitr::rand_seed)
+```
+
+# Introduction 
+
+This introduction provides some examples of in-text citations discussed during week 5, lecture 2 [@Broglio_2014].  As discussed by [-@Sohlberg_2014], I find it fascinating we can add APA references into R markdown. 
+
+# Methods
+We report how we determined our sample size, all data exclusions (if any), all manipulations, and all measures in the study. <!-- 21-word solution (Simmons, Nelson & Simonsohn, 2012; retrieved from http://ssrn.com/abstract=2160588) -->
+
+## Participants
+
+## Material
+
+## Procedure
+
+## Data analysis
+We used `r cite_r("r-references.bib")` for all our analyses.
+
+
+# Results
+
+```{r tbls, results = "asis"}
+
+?kable
+
+library(knitr)
+
+library(kableExtra)
+
+star %>% 
+  group_by(sex, frl) %>% 
+  summarize(math_mean = mean(tmathss),
+            math_sd   = sd(tmathss),
+            rdg_mean  = mean(treadss),
+            rdg_sd    = sd(treadss)) %>% 
+  kable(digits = 2)
+
+```
+
+
+```{r plot}
+ggplot(star, aes(totexp, tmathss)) +
+  geom_point(color = "grey") +
+  geom_smooth(aes(color = frl), method = "lm") +
+  theme(legend.position = "bottom") +
+  labs(x = "Teacher Experience (years)", 
+       y = "Total Math Scale Score",
+       title = "Relation Between Teacher Experience and Math Scores",
+       subtitle = "Separate regression line displayed by free/reduced price lunch status")
+```
+# Discussion
+
+
+\newpage
+
+# References
+```{r create_r-references}
+r_refs(file = "lab_8_references.bib")
+
+```
+
+\begingroup
+\setlength{\parindent}{-0.5in}
+\setlength{\leftskip}{0.5in}
+
+<div id = "refs"></div>
+\endgroup
+>>>>>>> Stashed changes
